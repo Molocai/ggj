@@ -5,6 +5,7 @@ using UnityEngine;
 public class CameraFollow : MonoBehaviour
 {
     public GameObject Target;
+    public float LeftRightMaxDistance = 20f;
 
     private Vector3 OffSet;
 
@@ -21,6 +22,13 @@ public class CameraFollow : MonoBehaviour
         if (Target)
         {
             Vector3 newPos = Vector3.Lerp(transform.position, Target.transform.position + OffSet, Time.deltaTime * 1f);
+
+            // Make it so the camera won't follow after we're out of bounds
+            if (newPos.z > LeftRightMaxDistance)
+                newPos.z = LeftRightMaxDistance;
+            else if (newPos.z < -LeftRightMaxDistance)
+                newPos.z = -LeftRightMaxDistance;
+
             transform.position = newPos;
         }
     }
