@@ -35,7 +35,7 @@ public class FakeThunderEffect : MonoBehaviour
             if (Time.time >= NextLighting)
             {
                 Boom = true;
-                transform.localPosition = new Vector3(transform.localPosition.x + Random.Range(-8, 8), transform.localPosition.y, transform.localPosition.z);
+                transform.localPosition = new Vector3(Random.Range(-8, 8), transform.localPosition.y, transform.localPosition.z);
                 NextLighting = Time.time + Random.Range(5, 15);
             }
         }
