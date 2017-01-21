@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Wave : MonoBehaviour
+public class WaveGenerator : MonoBehaviour
 {
     private Vector3[] baseHeight;
 

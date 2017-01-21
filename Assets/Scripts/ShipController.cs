@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Ship : MonoBehaviour
+public class ShipController : MonoBehaviour
 {
     public Transform Nose;
     public Transform Tail;
@@ -30,16 +30,9 @@ public class Ship : MonoBehaviour
         Vector3 tailNewPos = new Vector3(Tail.position.x, Tail.position.y, Tail.position.z);
 
         noseNewPos.y = SeaCalculator.GetWorldHeight(Nose.position);
-        tailNewPos.y = SeaCalculator.GetWorldHeight(Tail.position);  
+        tailNewPos.y = SeaCalculator.GetWorldHeight(Tail.position);
 
         Vector3 magicVector = noseNewPos - tailNewPos;
-
-        Debug.DrawLine(transform.position, transform.position + magicVector);
-
-        //Quaternion pouet = Quaternion.FromToRotation(transform.up, magicVector);
-        //Quaternion pouet = Quaternion.LookRotation(magicVector, transform.up);
-
-        //transform.rotation = pouet;
 
         transform.LookAt(transform.position + magicVector);
     }
