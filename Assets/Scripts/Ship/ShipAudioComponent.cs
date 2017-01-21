@@ -12,6 +12,9 @@ public class ShipAudioComponent : MonoBehaviour {
     public float EngineBasePitch = 0.5f;
     public AudioClip EngineAudioClip;
 
+    public RandomClipPlayer splashRandomPlayer;
+    public bool HasSplashed = false;
+
 	// Use this for initialization
 	void Start () {
         _engineAudioSource = gameObject.AddComponent<AudioSource>();
@@ -28,6 +31,22 @@ public class ShipAudioComponent : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         _engineAudioSource.pitch = EngineBasePitch + _shipController.GetSpeedPercent() * EnginePitchFactor;
-	}
+
+        Debug.Log(transform.rotation.eulerAngles.x);
+
+        if(!HasSplashed && transform.rotation.eulerAngles.x < 30f )
+        {
+            HasSplashed = true;
+            if(splashRandomPlayer != null)
+            {
+                splashRandomPlayer.Play();
+            }
+        }
+        else if(HasSplashed && transform.rotation.eulerAngles.x > 300.0f)
+        {
+            HasSplashed = false;
+        }
+
+    }
 }
 
