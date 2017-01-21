@@ -15,6 +15,7 @@ public class ShipController : MonoBehaviour
 
     [Header("Movements")]
     public float MinMoveSpeed = 0.5f;
+    public float MaxMoveSpeed = 3f;
     public float MomentumDecaySpeed = 0.5f;
     public float MovementAcceleration = 2f;
 
@@ -33,7 +34,7 @@ public class ShipController : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Z))
         {
-            CurrentSpeed = Mathf.Lerp(CurrentSpeed, 3f, Time.deltaTime * MovementAcceleration);
+            CurrentSpeed = Mathf.Lerp(CurrentSpeed, MaxMoveSpeed, Time.deltaTime * MovementAcceleration);
         }
 
         if (Input.GetKey(KeyCode.S))
@@ -119,5 +120,10 @@ public class ShipController : MonoBehaviour
         Vector3 direction = noseNewPos - tailNewPos;
 
         transform.LookAt(transform.position + direction);
+    }
+
+    public float GetSpeedPercent()
+    {
+        return CurrentSpeed / MaxMoveSpeed;
     }
 }
