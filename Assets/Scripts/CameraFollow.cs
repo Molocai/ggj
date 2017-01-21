@@ -32,4 +32,15 @@ public class CameraFollow : MonoBehaviour
             transform.position = newPos;
         }
     }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.cyan;
+
+        if (Target)
+        {
+            Gizmos.DrawLine(new Vector3(-30f, 3f, 20f), new Vector3(30f, 3f, 20f));
+            Gizmos.DrawLine(new Vector3(-30f, 3f, -20f), new Vector3(30f, 3f, -20f));
+        }
+    }
 }
