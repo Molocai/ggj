@@ -53,7 +53,7 @@ Shader "Custom/Transparent"
 	sampler2D _MainTex;
 	void surf(Input IN, inout SurfaceOutput o) {		
 		o.Albedo = _Color;
-		o.Alpha = 0.99 - (IN.customAlpha)*0.2;
+		o.Alpha = 0.97 - (IN.customAlpha)*0.5;
 	}
 
 	ENDCG
