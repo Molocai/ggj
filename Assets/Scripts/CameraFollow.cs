@@ -10,12 +10,18 @@ public class CameraFollow : MonoBehaviour
 
     void Start()
     {
-        OffSet = transform.position - Target.transform.position;
+        if (Target)
+            OffSet = transform.position - Target.transform.position;
+        else
+            Debug.LogWarning("You need to define a target for the camera to follow");
     }
 
     void Update()
     {
-        Vector3 newPos = Vector3.Lerp(transform.position, Target.transform.position + OffSet, Time.deltaTime * 1f);
-        transform.position = newPos;
+        if (Target)
+        {
+            Vector3 newPos = Vector3.Lerp(transform.position, Target.transform.position + OffSet, Time.deltaTime * 1f);
+            transform.position = newPos;
+        }
     }
 }
