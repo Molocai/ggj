@@ -5,6 +5,7 @@ using UnityEngine;
 public class WaveGenerator : MonoBehaviour
 {
     private Vector3[] baseHeight;
+    public GameObject Boat;
 
     void Update()
     {
@@ -22,5 +23,8 @@ public class WaveGenerator : MonoBehaviour
 
         mesh.vertices = vertices;
         mesh.RecalculateNormals();
+
+        Vector3 newPos = new Vector3(Boat.transform.position.x, transform.position.y, Boat.transform.position.z);
+        transform.position = newPos;
     }
 }
