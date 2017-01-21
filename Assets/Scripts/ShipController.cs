@@ -100,7 +100,7 @@ public class ShipController : MonoBehaviour
     {
         // Calculate the new height according to sea level
         Vector3 newPos = new Vector3(transform.position.x, transform.position.y, transform.position.z);
-        newPos.y = SeaCalculator.GetWorldHeight(transform.position);
+        newPos.y = SeaCalculator.Instance.GetWorldHeight(transform.position);
 
         // Apply it
         transform.position = newPos;
@@ -113,8 +113,8 @@ public class ShipController : MonoBehaviour
         Vector3 tailNewPos = new Vector3(Tail.position.x, Tail.position.y, Tail.position.z);
 
         // Calculate the new height according to sea level
-        noseNewPos.y = SeaCalculator.GetWorldHeight(Nose.position);
-        tailNewPos.y = SeaCalculator.GetWorldHeight(Tail.position);
+        noseNewPos.y = SeaCalculator.Instance.GetWorldHeight(Nose.position);
+        tailNewPos.y = SeaCalculator.Instance.GetWorldHeight(Tail.position);
 
         Vector3 direction = noseNewPos - tailNewPos;
 
