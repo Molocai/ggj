@@ -5,8 +5,8 @@ public class SettingMonsterShader : MonoBehaviour {
 
     public Material mat;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
 	
 	}
 	
@@ -14,6 +14,5 @@ public class SettingMonsterShader : MonoBehaviour {
 	void Update () {
         mat.SetVector("_LighthouseLocation", transform.position);
         mat.SetVector("_LighthouseVector", transform.forward);
-
     }
 }
