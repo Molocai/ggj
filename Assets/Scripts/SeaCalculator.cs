@@ -11,7 +11,7 @@ public static class SeaCalculator
     public static float GetWorldHeight(Vector3 vertice)
     {
         float height = 0f;
-        height = Mathf.Sin(Time.time * Speed + vertice.x + vertice.y + vertice.z) * Scale;
+        height = Mathf.Sin(Time.time * Speed + vertice.x + vertice.z) * Scale;
         //height += Mathf.PerlinNoise(vertice.x, vertice.y + Mathf.Sin(Time.time * 0.1f) * NoiseStrength);
 
         return height;
