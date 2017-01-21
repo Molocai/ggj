@@ -2,13 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class SeaCalculator
+public class SeaCalculator : Singleton<SeaCalculator>
 {
-    public static float Speed = 2f;
-    public static float Scale = 0.2f;
-    public static float NoiseStrength = 1f;
+    public float Speed = 2f;
+    public float Scale = 0.2f;
+    public float NoiseStrength = 1f;
 
-    public static float GetWorldHeight(Vector3 vertice)
+    protected SeaCalculator() { }
+
+    public float GetWorldHeight(Vector3 vertice)
     {
         float height = 0f;
         height = Mathf.Sin(Time.time * Speed + vertice.x + vertice.z) * Scale;
