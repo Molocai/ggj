@@ -124,6 +124,6 @@ public class ShipController : MonoBehaviour
 
     public float GetSpeedPercent()
     {
-        return CurrentSpeed / MaxMoveSpeed;
+        return (CurrentSpeed - MinMoveSpeed) / (MaxMoveSpeed - MinMoveSpeed);
     }
 }
