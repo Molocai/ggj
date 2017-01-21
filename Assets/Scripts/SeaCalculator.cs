@@ -14,6 +14,7 @@ public class SeaCalculator : Singleton<SeaCalculator>
     {
         float height = 0f;
         height = Mathf.Sin(Time.time * Speed + vertice.x + vertice.z) * Scale;
+        height += Mathf.Sin(Time.time * Speed * 0.25f + vertice.x - vertice.z) * Scale *0.5f;
         //height += Mathf.PerlinNoise(vertice.x, vertice.y + Mathf.Sin(Time.time * 0.1f) * NoiseStrength);
 
         return height;
