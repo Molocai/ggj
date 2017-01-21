@@ -10,6 +10,7 @@ public enum DIRECTION
 
 public class ShipController : MonoBehaviour
 {
+    [Header("Game objects")]
     public Transform Nose;
     public Transform Tail;
 
@@ -29,6 +30,9 @@ public class ShipController : MonoBehaviour
     private float CurrentRotation = 0f;
     private bool IsPressingRotation = false;
     private DIRECTION RotationDirection;
+
+    [Header("Map bounds")]
+    public float LeftRightMaxDistance = 20f;
 
     void Update()
     {
