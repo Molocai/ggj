@@ -130,4 +130,9 @@ public class ShipController : MonoBehaviour
     {
         return (CurrentSpeed - MinMoveSpeed) / (MaxMoveSpeed - MinMoveSpeed);
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log("Wesh");
+    }
 }
