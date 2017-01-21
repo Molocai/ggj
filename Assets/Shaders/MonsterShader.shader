@@ -46,7 +46,7 @@ Shader "Custom/Transparent"
 		UNITY_INITIALIZE_OUTPUT(Input, o);
 		float4 WSvertex = mul(unity_ObjectToWorld, v.vertex);
 		float3 vect = normalize(WSvertex.xyz - _LighthouseLocation.xyz);
-		o.customAlpha = cubicImpulse(1, _LighthouseWidth, dot(vect, _LighthouseVector));
+		o.customAlpha = cubicImpulse(1, _LighthouseWidth, abs(dot(vect, _LighthouseVector)));
 	}
 	sampler2D _MainTex;
 	void surf(Input IN, inout SurfaceOutput o) {
