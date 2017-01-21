@@ -9,8 +9,10 @@ public class MapTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        GameObject chunk = LevelChunks[Random.Range(0, LevelChunks.Length - 1)];
+        
         GameObject.Instantiate(LevelChunks[Random.Range(0, LevelChunks.Length - 1)], new Vector3(transform.position.x + NextChunkDistance, transform.position.y, transform.position.z), Quaternion.identity);
-        transform.Translate(new Vector3(NextChunkDistance, 0));
+        transform.Translate(new Vector3(chunk.GetComponent<LevelChunk>().DistanceForNextSpawn, 0));
     }
 
     private void OnDrawGizmosSelected()
