@@ -14,6 +14,7 @@ public class MonsterController : MonoBehaviour
     public float ChaseCooldown = 6f;
 
     public float _cooldownElapsedTime = 0.0f;
+    public RandomClipPlayer LostPlayerSounds;
 
     // Update is called once per frame
     void Update()
@@ -48,6 +49,8 @@ public class MonsterController : MonoBehaviour
     {
         _cooldownElapsedTime = 0.0f;
         Chasing = false;
+        if (LostPlayerSounds != null)
+            LostPlayerSounds.Play();
 
         Debug.Log("Left Play area");
     }
