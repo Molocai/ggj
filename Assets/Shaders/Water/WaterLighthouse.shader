@@ -54,7 +54,7 @@
 		void surf (Input IN, inout SurfaceOutputStandard o) {
 			// Albedo comes from a texture tinted by color
 			
-			o.Albedo = _Color*(0.5 + IN.customAlpha*0.5);
+			o.Albedo = _Color;//*(1 + IN.customAlpha*0.5);
 			// Metallic and smoothness come from slider variables
 			o.Metallic = _Metallic;
 			o.Smoothness = _Glossiness;
