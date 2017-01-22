@@ -1,6 +1,6 @@
 ﻿// Upgrade NOTE: replaced '_Object2World' with 'unity_ObjectToWorld'
 
-Shader "Custom/Transparent"
+Shader "Custom/Water"
 {
 	Properties
 	{
@@ -9,6 +9,8 @@ Shader "Custom/Transparent"
 		_LighthouseLocation("Lighthouse Location", Vector) = (0.0, 0.0, 0.0, 0.0)
 		_LighthouseVector("Lighthouse Vector", Vector) = (1.0, 0.0, 0.0, 0.0)
 		_LighthouseWidth("Lighthouse Width", Float) = 0.5
+		_Glossiness("Smoothness", Range(0,1)) = 0.8	
+		_Metallic("Metallic", Range(0,1)) = 0.313
 	}
 		SubShader
 	{
@@ -17,7 +19,7 @@ Shader "Custom/Transparent"
 
 		CGPROGRAM
 
-#pragma surface surf Lambert vertex:vert alpha
+#pragma surface surf Surface vertex:vert alpha
 #pragma target 3.0
 
 
@@ -49,11 +51,13 @@ Shader "Custom/Transparent"
 		o.customAlpha = cubicImpulse(1, _LighthouseWidth, abs(dot(vect, _LighthouseVector)));
 		//float dotProd = abs(dot(vect, _LighthouseVector));
 		//o.customAlpha = step(1 - _LighthouseWidth*0.5, dotProd) -step(1 + _LighthouseWidth*0.5, dotProd);
-	}
-	sampler2D _MainTex;
-	void surf(Input IN, inout SurfaceOutput o) {		
-		o.Albedo = _Color * IN.customAlpha;
-		o.Alpha = 0.999 - (IN.customAlpha)*0.5;
+	}	
+
+	void surf(Input IN, inout SurfaceOutputStandard o) {
+		o.Metallic = _Metallic;
+		o.Smoothness = _Glossiness;
+		o.Albedo = _Color;// *IN.customAlpha;
+		o.Alpha = 1;// 0.999 - (IN.customAlpha)*0.5;
 	}
 
 	ENDCG
