@@ -4,8 +4,7 @@ using System.Collections;
 public class PlayArea : MonoBehaviour {
 
     void OnTriggerExit(Collider other)
-    {
-        Debug.Log("fucking hell");
+    {        
         MonsterController controller = other.GetComponent<MonsterController>();
         if ( controller != null)
         {
