@@ -9,6 +9,7 @@ public class MonsterController : MonoBehaviour
     public LayerMask TargetLayer;
 
     public float ChaseMaximumHeight;
+    public float BaseHeight;
 
     public float MovementSpeed = 0.5f;
     public float AttackSpeed = 0.9f;
@@ -24,6 +25,8 @@ public class MonsterController : MonoBehaviour
     public Vector3 LighthouseVector;
     public float VisibleUnderwaterThreshold = 0.1f;
     public RandomClipPlayer JumpscareSounds;
+
+    public AudioSource SwimAudioSource;
 
     private Animator _animator;
 
@@ -52,6 +55,10 @@ public class MonsterController : MonoBehaviour
 
             if (hitInfo.collider != null && hitInfo.collider.gameObject == Boat)
             {
+                if(SwimAudioSource != null)
+                    SwimAudioSource.Play();
+                Debug.Log("djkslmqdfsé");
+
                 if (Vector3.Distance(transform.position, Boat.transform.position) <= AttackRange)
                 {
                     if(_animator != null)
@@ -95,6 +102,9 @@ public class MonsterController : MonoBehaviour
         if (LostPlayerSounds != null)
             LostPlayerSounds.Play();
 
+        if(SwimAudioSource != null)
+            SwimAudioSource.Stop();
+
         Debug.Log("Left Play area");
     }
 
@@ -103,6 +113,7 @@ public class MonsterController : MonoBehaviour
         if (Chasing || _cooldownElapsedTime < ChaseCooldown) return;
 
         transform.position = tpTarget.position;
+        transform.position = new Vector3(transform.position.x, BaseHeight, transform.position.z);
         Chasing = true;
     }
 
