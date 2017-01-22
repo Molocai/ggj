@@ -133,6 +133,7 @@ public class ShipController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("Wesh");
+        CurrentSpeed = 0;
+        CurrentRotation = 0;
     }
 }
