@@ -7,7 +7,7 @@ public class RandomClipPlayer : MonoBehaviour {
     public float MinDistance = 100f;
     public float PitchVariation = 0.25f;
     public float Volume = 1.0f;
-    public float BasePitch = 0.5f;    
+    public float BasePitch = 1f;    
 
     public int previousPick = 0;
     private AudioSource _audiosource;
@@ -19,11 +19,17 @@ public class RandomClipPlayer : MonoBehaviour {
             Debug.Log("No clips found !");
             return;
         }
+        else if (audioclips.Length == 1)
+        {
+            _audiosource.pitch = 1f + Random.Range(-PitchVariation * 0.5f, PitchVariation * 0.5f);
+            _audiosource.PlayOneShot(audioclips[0]);
+            return;
+        }
 
         int pick = 0;
         do
         {
-            pick = Random.Range(0, audioclips.Length - 1);
+            pick = Random.Range(0, audioclips.Length);
         } while (previousPick == pick);
 
         previousPick = pick;

@@ -4,7 +4,8 @@ using System.Collections;
 public class ShipRaycast : MonoBehaviour
 {
     public LayerMask TargetLayer;
-    public float RaycastDistance = 20f;
+    public float RaycastMaxDistance = 40f;
+    public float RaycastMinDistance = 20f;
     public MonsterController monsterController;
 
     // Use this for initialization
@@ -19,12 +20,12 @@ public class ShipRaycast : MonoBehaviour
         RaycastHit hitInfo;
         Ray r = new Ray(transform.position, transform.forward);
 
-        Physics.Raycast(r, out hitInfo, RaycastDistance, TargetLayer);
-        Debug.DrawRay(r.origin, r.direction * RaycastDistance, Color.cyan);
+        Physics.Raycast(r, out hitInfo, RaycastMaxDistance, TargetLayer);
+        Debug.DrawRay(r.origin, r.direction * RaycastMaxDistance, Color.cyan);
 
         if (hitInfo.collider != null)
         {
-            if(monsterController != null)
+            if(monsterController != null && hitInfo.distance <= RaycastMinDistance)
             {
                 monsterController.TeleportToSpawn(hitInfo.transform);
             }   
