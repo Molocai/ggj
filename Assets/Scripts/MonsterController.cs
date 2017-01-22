@@ -22,6 +22,7 @@ public class MonsterController : MonoBehaviour
             Vector3 newPos = transform.position;
 
             newPos += direction * MovementSpeed * Time.deltaTime;
+            newPos.y = transform.position.y;
 
             transform.LookAt(Boat.transform);
             transform.position = newPos;
