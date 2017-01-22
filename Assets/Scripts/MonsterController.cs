@@ -7,6 +7,8 @@ public class MonsterController : MonoBehaviour
     public float ChaseRange = 20f;
     public LayerMask TargetLayer;
 
+    public float ChaseMaximumHeight;
+
     public float MovementSpeed = 0.5f;
 
     // Update is called once per frame
@@ -19,9 +21,11 @@ public class MonsterController : MonoBehaviour
         if (Vector3.Distance(transform.position, Boat.transform.position) <= ChaseRange && hitInfo.collider != null && hitInfo.collider.gameObject == Boat)
         {
             Vector3 direction = Boat.transform.position - transform.position;
+            direction.y = 0;
             Vector3 newPos = transform.position;
 
             newPos += direction * MovementSpeed * Time.deltaTime;
+            newPos.y = Mathf.Lerp(newPos.y, ChaseMaximumHeight, Time.deltaTime); // transform.position.y;
 
             transform.LookAt(Boat.transform);
             transform.position = newPos;
