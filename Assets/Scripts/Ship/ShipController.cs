@@ -68,6 +68,10 @@ public class ShipController : MonoBehaviour
         Move();
         ApplyBuoyancy();
         TiltBoat();
+
+        // Our own kinematic hack of doom
+        GetComponent<Rigidbody>().velocity = Vector3.zero;
+        GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
     }
 
     private void Move()
