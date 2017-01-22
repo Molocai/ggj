@@ -34,6 +34,10 @@ public class ShipController : MonoBehaviour
     [Header("Map bounds")]
     public float LeftRightMaxDistance = 20f;
 
+    [Header("Collisions")]
+    public GameObject SparklesPrefab;
+    public RandomClipPlayer ImpactSounds;
+
     void Update()
     {
         if (Input.GetKey(KeyCode.Z))
@@ -139,5 +143,11 @@ public class ShipController : MonoBehaviour
     {
         CurrentSpeed = 0;
         CurrentRotation = 0;
+
+        if (ImpactSounds != null)
+            ImpactSounds.Play();
+
+        GameObject sparkles = GameObject.Instantiate(SparklesPrefab, collision.contacts[0].point + new Vector3(0, 0.3f), Quaternion.LookRotation(transform.position - collision.transform.position)) as GameObject;
+        Destroy(sparkles, 1.5f);
     }
 }
