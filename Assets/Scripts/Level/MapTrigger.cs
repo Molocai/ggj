@@ -5,17 +5,20 @@ using UnityEngine;
 public class MapTrigger : MonoBehaviour
 {
     public GameObject[] LevelChunks;
-    public float NextChunkDistance;
+    public LevelChunk LastChunk;
 
     private void OnTriggerEnter(Collider other)
     {
-        GameObject.Instantiate(LevelChunks[Random.Range(0, LevelChunks.Length - 1)], new Vector3(transform.position.x + NextChunkDistance, transform.position.y, transform.position.z), Quaternion.identity);
-        transform.Translate(new Vector3(NextChunkDistance, 0));
+        GameObject chunk = LevelChunks[Random.Range(0, LevelChunks.Length - 1)];
+        GameObject.Instantiate(chunk, new Vector3(transform.position.x + LastChunk.DistanceForNextSpawn, transform.position.y, transform.position.z), Quaternion.identity);
+
+        transform.Translate(new Vector3(LastChunk.DistanceForNextSpawn, 0));
+
+        LastChunk = chunk.GetComponent<LevelChunk>();
     }
 
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(new Vector3(transform.position.x + NextChunkDistance, transform.position.y, transform.position.z), new Vector3(0.5f, 5f, 40f));
     }
 }

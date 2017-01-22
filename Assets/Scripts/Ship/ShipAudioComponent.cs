@@ -32,8 +32,6 @@ public class ShipAudioComponent : MonoBehaviour {
 	void Update () {
         _engineAudioSource.pitch = EngineBasePitch + _shipController.GetSpeedPercent() * EnginePitchFactor;
 
-        Debug.Log(transform.rotation.eulerAngles.x);
-
         if(!HasSplashed && transform.rotation.eulerAngles.x < 30f )
         {
             HasSplashed = true;
