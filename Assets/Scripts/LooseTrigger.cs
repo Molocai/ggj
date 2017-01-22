@@ -6,12 +6,14 @@ using System.Collections;
 public class LooseTrigger : MonoBehaviour {
 
     private Rigidbody _rigidbody;
+    public float elapsedTime = 0.0f;
 
     void OnTriggerEnter(Collider other)
     {
         if(other.tag == "Player")
         {
             SceneManager.LoadScene("LoseScene");
+            Scoring.ElaspedTime = elapsedTime;
         }
     }
 
@@ -24,6 +26,6 @@ public class LooseTrigger : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
-	}
+        elapsedTime += Time.deltaTime;
+    }
 }
