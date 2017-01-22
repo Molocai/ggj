@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: c7674924a751d4a4ea86994351262844
-timeCreated: 1485047102
+guid: 87bf253ac97c4224d8d69db5a684852b
+timeCreated: 1485086781
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -54,7 +54,7 @@ ModelImporter:
     4300000: Monster_boat_corps_topo:Group26914
     4300002: Monster_boat_dents_topo:ZBrush_defualt_group1
     4300004: Monster_boat_membrane_topo:Group31469
-    7400000: Swim
+    7400000: Take 001
     9500000: //RootNode
     13700000: Monster_boat_corps_topo:Group26914
     13700002: Monster_boat_dents_topo:ZBrush_defualt_group1
@@ -81,18 +81,18 @@ ModelImporter:
     extraExposedTransformPaths: []
     clipAnimations:
     - serializedVersion: 16
-      name: Swim
+      name: Take 001
       takeName: Take 001
-      firstFrame: 10
-      lastFrame: 89
+      firstFrame: 90
+      lastFrame: 178
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 1
-      loopBlend: 1
+      loopTime: 0
+      loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
       loopBlendPositionXZ: 0
@@ -104,10 +104,11 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.28429425
-        functionName: PlaySwimSound
+      - time: 0.17418031
+        functionName: PlayAttackSound
         data: 
-        objectReferenceParameter: {instanceID: 0}
+        objectReferenceParameter: {fileID: 100038, guid: c7674924a751d4a4ea86994351262844,
+          type: 3}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0

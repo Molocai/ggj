@@ -4,12 +4,14 @@ using System.Collections;
 public class MonsterController : MonoBehaviour
 {
     public GameObject Boat;
-    public float ChaseRange = 20f;
+    public float ChaseRange = 5f;
+    public float AttackRange = 2.5f;
     public LayerMask TargetLayer;
 
     public float ChaseMaximumHeight;
 
     public float MovementSpeed = 0.5f;
+    public float AttackSpeed = 0.9f;
     public bool Chasing = false;
     public float ChaseCooldown = 6f;
 
@@ -22,6 +24,13 @@ public class MonsterController : MonoBehaviour
     public Vector3 LighthouseVector;
     public float VisibleUnderwaterThreshold = 0.1f;
     public RandomClipPlayer JumpscareSounds;
+
+    private Animator _animator;
+
+    void Start()
+    {
+        _animator = GetComponentInChildren<Animator>();
+    }
 
     // Update is called once per frame
     void Update()
@@ -41,18 +50,35 @@ public class MonsterController : MonoBehaviour
             Ray r = new Ray(transform.position, (Boat.transform.position - transform.position));
             Physics.Raycast(r, out hitInfo, 1000f, TargetLayer);
 
-            if (Vector3.Distance(transform.position, Boat.transform.position) <= ChaseRange && hitInfo.collider != null && hitInfo.collider.gameObject == Boat)
+            if (hitInfo.collider != null && hitInfo.collider.gameObject == Boat)
             {
-                Chasing = true;
-                Vector3 direction = Boat.transform.position - transform.position;
-                direction.y = 0;
-                Vector3 newPos = transform.position;
+                if (Vector3.Distance(transform.position, Boat.transform.position) <= AttackRange)
+                {
+                    if(_animator != null)
+                        _animator.Play("Attack");
 
-                newPos += direction * MovementSpeed * Time.deltaTime;
-                newPos.y = Mathf.Lerp(newPos.y, ChaseMaximumHeight, Time.deltaTime); // transform.position.y;
+                    Vector3 direction = Boat.transform.position - transform.position;
+                    direction.y = 0;
+                    Vector3 newPos = transform.position;
 
-                transform.LookAt(Boat.transform);
-                transform.position = newPos;
+                    newPos += direction * AttackSpeed * Time.deltaTime;
+                    newPos.y = Mathf.Lerp(newPos.y, ChaseMaximumHeight, Time.deltaTime); // transform.position.y;
+
+                    transform.LookAt(Boat.transform);
+                    transform.position = newPos;
+                }
+                if (Vector3.Distance(transform.position, Boat.transform.position) <= ChaseRange)
+                {
+                    Vector3 direction = Boat.transform.position - transform.position;
+                    direction.y = 0;
+                    Vector3 newPos = transform.position;
+
+                    newPos += direction * MovementSpeed * Time.deltaTime;
+                    newPos.y = Mathf.Lerp(newPos.y, ChaseMaximumHeight, Time.deltaTime); // transform.position.y;
+
+                    transform.LookAt(Boat.transform);
+                    transform.position = newPos;
+                }
             }
         }
         else
@@ -84,6 +110,7 @@ public class MonsterController : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, ChaseRange);
+        Gizmos.DrawWireSphere(transform.position, AttackRange);
     }
 
     //Use to isolate a feature, or as cheap replacement for gaussian
