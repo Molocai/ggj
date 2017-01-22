@@ -10,7 +10,7 @@ public class LooseTrigger : MonoBehaviour {
     {
         if(other.tag == "Player")
         {
-            Debug.Log("YOU LOOSE YOU LOOSER !");
+            Debug.Log("YOU LOSE YOU LOSER !");
         }
     }
 
