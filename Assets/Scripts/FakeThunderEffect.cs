@@ -10,6 +10,8 @@ public class FakeThunderEffect : MonoBehaviour
     private float Progress = 0f;
     private float NextLighting = 3.5f;
 
+    public AudioClip[] ThunderSounds;
+
     // Use this for initialization
     void Start()
     {
@@ -35,8 +37,10 @@ public class FakeThunderEffect : MonoBehaviour
             if (Time.time >= NextLighting)
             {
                 Boom = true;
-                transform.localPosition = new Vector3(Random.Range(-8, 8), transform.localPosition.y, transform.localPosition.z);
-                NextLighting = Time.time + Random.Range(5, 15);
+                GetComponent<AudioSource>().PlayOneShot(ThunderSounds[Random.Range(0, ThunderSounds.Length - 1)]);
+
+                transform.localPosition = new Vector3(Random.Range(-6, 6), transform.localPosition.y, transform.localPosition.z);
+                NextLighting = Time.time + Random.Range(10, 25);
             }
         }
     }
