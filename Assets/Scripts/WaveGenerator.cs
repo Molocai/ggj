@@ -18,7 +18,7 @@ public class WaveGenerator : MonoBehaviour
         for (int i = 0; i < vertices.Length; i++)
         {
             vertices[i] = baseHeight[i];
-            vertices[i].y = SeaCalculator.Instance.GetWorldHeight(transform.TransformPoint(vertices[i]));
+            vertices[i].y = SeaCalculator.GetWorldHeight(transform.TransformPoint(vertices[i]));
         }
 
         mesh.vertices = vertices;
