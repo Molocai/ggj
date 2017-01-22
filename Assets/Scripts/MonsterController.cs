@@ -56,8 +56,7 @@ public class MonsterController : MonoBehaviour
             if (hitInfo.collider != null && hitInfo.collider.gameObject == Boat)
             {
                 if(SwimAudioSource != null)
-                    SwimAudioSource.Play();
-                //Debug.Log("djkslmqdfsé");
+                    SwimAudioSource.Play();                
 
                 if (Vector3.Distance(transform.position, Boat.transform.position) <= AttackRange)
                 {
@@ -74,8 +73,11 @@ public class MonsterController : MonoBehaviour
                     transform.LookAt(Boat.transform);
                     transform.position = newPos;
                 }
-                if (Vector3.Distance(transform.position, Boat.transform.position) <= ChaseRange)
+                else if (Vector3.Distance(transform.position, Boat.transform.position) <= ChaseRange)
                 {
+                    if (_animator != null)
+                        _animator.Play("Swim");
+
                     Vector3 direction = Boat.transform.position - transform.position;
                     direction.y = 0;
                     Vector3 newPos = transform.position;
