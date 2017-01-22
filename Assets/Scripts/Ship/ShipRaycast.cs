@@ -5,6 +5,7 @@ public class ShipRaycast : MonoBehaviour
 {
     public LayerMask TargetLayer;
     public float RaycastDistance = 20f;
+    public MonsterController monsterController;
 
     // Use this for initialization
     void Start()
@@ -23,7 +24,10 @@ public class ShipRaycast : MonoBehaviour
 
         if (hitInfo.collider != null)
         {
-            Debug.Log(hitInfo.collider.name);
+            if(monsterController != null)
+            {
+                monsterController.TeleportToSpawn(hitInfo.transform);
+            }   
         }
     }
 }
