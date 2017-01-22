@@ -23,7 +23,7 @@ public class SettingMonsterShader : MonoBehaviour {
         }
         else
         {
-            Debug.Log("Link monster controller for jump scare sounds pliz.");
+            //Debug.Log("Link monster controller for jump scare sounds pliz.");
         }
     }
 }

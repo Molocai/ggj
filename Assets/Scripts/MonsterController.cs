@@ -57,7 +57,7 @@ public class MonsterController : MonoBehaviour
             {
                 if(SwimAudioSource != null)
                     SwimAudioSource.Play();
-                Debug.Log("djkslmqdfsé");
+                //Debug.Log("djkslmqdfsé");
 
                 if (Vector3.Distance(transform.position, Boat.transform.position) <= AttackRange)
                 {
