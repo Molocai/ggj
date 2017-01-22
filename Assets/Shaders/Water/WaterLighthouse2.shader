@@ -2,26 +2,27 @@
 
 Shader "Custom/Water"
 {
-	Properties
-	{
+	Properties{
 		_Color("Color", Color) = (1,1,1,1)
 		_MainTex("Albedo (RGB)", 2D) = "white" {}
-		_LighthouseLocation("Lighthouse Location", Vector) = (0.0, 0.0, 0.0, 0.0)
+	_LighthouseLocation("Lighthouse Location", Vector) = (0.0, 0.0, 0.0, 0.0)
 		_LighthouseVector("Lighthouse Vector", Vector) = (1.0, 0.0, 0.0, 0.0)
 		_LighthouseWidth("Lighthouse Width", Float) = 0.5
-		_Glossiness("Smoothness", Range(0,1)) = 0.8	
-		_Metallic("Metallic", Range(0,1)) = 0.313
+		_Glossiness("Smoothness", Range(0,1)) = 0.5
+		_Metallic("Metallic", Range(0,1)) = 0.0
 	}
-		SubShader
-	{
+		SubShader{
 		Tags{ "Queue" = "Transparent" "RenderType" = "Transparent" }
 		LOD 200
 
 		CGPROGRAM
+		// Physically based Standard lighting model, and enable shadows on all light types
+#pragma surface surf Standard vertex:vert alpha
 
-#pragma surface surf Surface vertex:vert alpha
+		// Use shader model 3.0 target, to get nicer looking lighting
 #pragma target 3.0
 
+		sampler2D _MainTex;
 
 	struct Input {
 		float2 uv_MainTex;
@@ -51,16 +52,18 @@ Shader "Custom/Water"
 		o.customAlpha = cubicImpulse(1, _LighthouseWidth, abs(dot(vect, _LighthouseVector)));
 		//float dotProd = abs(dot(vect, _LighthouseVector));
 		//o.customAlpha = step(1 - _LighthouseWidth*0.5, dotProd) -step(1 + _LighthouseWidth*0.5, dotProd);
-	}	
+	}
 
 	void surf(Input IN, inout SurfaceOutputStandard o) {
+		// Albedo comes from a texture tinted by color
+
+		o.Albedo = _Color*(0.5 + IN.customAlpha*0.5);
+		// Metallic and smoothness come from slider variables
 		o.Metallic = _Metallic;
 		o.Smoothness = _Glossiness;
-		o.Albedo = _Color;// *IN.customAlpha;
-		o.Alpha = 1;// 0.999 - (IN.customAlpha)*0.5;
+		o.Alpha = 1 - IN.customAlpha;
 	}
-
 	ENDCG
 	}
-		FallBack "Standard"
+		FallBack "Diffuse"
 }
