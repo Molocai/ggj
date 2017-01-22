@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 [RequireComponent (typeof(Rigidbody))]
@@ -10,7 +11,7 @@ public class LooseTrigger : MonoBehaviour {
     {
         if(other.tag == "Player")
         {
-            Debug.Log("YOU LOSE YOU LOSER !");
+            SceneManager.LoadScene("LoseScene");
         }
     }
 
